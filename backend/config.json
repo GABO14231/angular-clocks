@@ -1,0 +1,28 @@
+{
+    "database_params":
+    {
+        "username": "postgres",
+        "password": "290103GAM",
+        "database": "angular_clocks",
+        "ip": "localhost",
+        "port": "5432"
+    },
+    "queries":
+    {
+        "addUser": "INSERT INTO users (email, username, user_password, first_name, last_name, code) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;",
+        "deleteUser": "DELETE FROM users WHERE id_user = $1;",
+        "updateUser": "UPDATE users SET username = $1, email = $2, first_name = $3, last_name = $4, user_password = $5 WHERE id_user = $6 RETURNING *;",
+        "updateUser2": "UPDATE users SET username = $1, email = $2, first_name = $3, last_name = $4 WHERE id_user = $5 RETURNING *;",
+        "getUsers": "SELECT * FROM users;",
+        "getUser": "SELECT * FROM users WHERE email = $1 OR username = $2",
+        "getUserEmail": "SELECT * FROM users WHERE email = $1",
+        "getUsername": "SELECT * FROM users WHERE username = $1",
+        "verifyPass": "SELECT user_password FROM users WHERE id_user = $1",
+        "recoverPass": "UPDATE users SET code = $1, user_password = $2 WHERE id_user = $3 RETURNING *;",
+        "getCode": "SELECT id_user FROM users WHERE code = $1",
+        "updateCode": "UPDATE users SET code = $1 WHERE id_user = $2 RETURNING *;",
+        "resetUserId": "ALTER SEQUENCE users_id_user_seq RESTART;",
+        "resetUserId2": "WITH updated AS (SELECT id_user, ROW_NUMBER() OVER (ORDER BY id_user) AS new_id FROM users) UPDATE users SET id_user = updated.new_id FROM updated WHERE users.id_user = updated.id_user;",
+        "resetUserId3": "SELECT setval('users_id_user_seq', COALESCE((SELECT MAX(id_user) FROM users), 0) + 1);"
+    }
+}
