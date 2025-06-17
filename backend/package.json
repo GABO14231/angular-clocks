@@ -5,7 +5,7 @@
     "scripts": {"dev": "node expressServer.js"},
     "dependencies":
     {
-        "express": "^19.1.0",
+        "express": "^5.1.0",
         "pg": "^8.16.0"
     }
 }
