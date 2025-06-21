@@ -1,0 +1,51 @@
+<div class="profile-page">
+    <app-navbar [options]="navbarOptions"></app-navbar>
+    <h2>Update Profile</h2>
+    <form>
+        <input name="username" placeholder="Username" [(ngModel)]="form.username" />
+        <input name="email" placeholder="Email" [(ngModel)]="form.email" />
+        <input name="first_name" placeholder="First Name" [(ngModel)]="form.first_name" />
+        <input name="last_name" placeholder="Last Name" [(ngModel)]="form.last_name" />
+        <h2>Change Password</h2>
+        <div class="password-wrapper">
+            <input [type]="passwordVisibility['currentPassword'] ? 'text' : 'password'" name="currentPassword"
+              placeholder="Current Password" [(ngModel)]="form.currentPassword" />
+            <button type="button" (click)="togglePasswordVisibility('currentPassword')" class="toggle-password">
+              <fa-icon [icon]="passwordVisibility['currentPassword'] ? 'eye-slash' : 'eye'"></fa-icon>
+            </button>
+        </div>
+        <div class="password-wrapper">
+            <input [type]="passwordVisibility['newPassword'] ? 'text' : 'password'" name="newPassword"
+                placeholder="New Password" [(ngModel)]="form.newPassword" />
+            <button type="button" (click)="togglePasswordVisibility('newPassword')" class="toggle-password">
+                <fa-icon [icon]="passwordVisibility['newPassword'] ? 'eye-slash' : 'eye'"></fa-icon>
+            </button>
+        </div>
+        <div class="password-wrapper">
+            <input [type]="passwordVisibility['confirmPassword'] ? 'text' : 'password'" name="confirmPassword"
+                placeholder="Confirm New Password" [(ngModel)]="form.confirmPassword" />
+            <button type="button" (click)="togglePasswordVisibility('confirmPassword')" class="toggle-password">
+                <fa-icon [icon]="passwordVisibility['confirmPassword'] ? 'eye-slash' : 'eye'"></fa-icon>
+            </button>
+        </div>
+        <button class="submitButton" type="button" (click)="confirmUpdate()">Update Profile</button>
+    </form>
+    <hr />
+    <h2>Backup Code</h2>
+    <input style="text-align: center;" [type]="passwordVisibility['backupCode'] ? 'text' : 'password'" readonly
+        [(ngModel)]="form.code" />
+    <button style="width: 100%" class="backupButton" (click)="togglePasswordVisibility('backupCode')">
+        Show Backup Code
+    </button>
+    <button style="width: 100%" class="backupButton" (click)="confirmChangeCode()">
+        Change Backup Code
+    </button>
+    <hr />
+    <button class="deleteButton" (click)="confirmDeleteProfile()">Delete Profile</button>
+    <ng-container *ngIf="showConfirmModal">
+        <app-modal [message]="confirmModalConfig.message" [buttons]="confirmModalConfig.buttons"></app-modal>
+    </ng-container>
+    <ng-container *ngIf="message">
+        <app-modal [message]="message" [buttons]="[{label: 'Close', action: clearMessage.bind(this)}]"></app-modal>
+    </ng-container>
+</div>
