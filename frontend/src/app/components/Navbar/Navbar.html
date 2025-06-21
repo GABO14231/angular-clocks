@@ -1,0 +1,21 @@
+<nav [ngClass]="{'navbar': true, 'visible': isVisible, 'hidden': !isVisible}">
+  <div class="navbar-left">
+    <ng-container *ngIf="isHome; else notHome">
+      <img src="assets/angular.svg" alt="Logo" class="logo" />
+      <h1>Angular Clocks</h1>
+    </ng-container>
+    <ng-template #notHome>
+      <a routerLink="/" class="navbar-home-link">
+        <img src="assets/angular.svg" alt="Logo" class="logo" />
+        <h1>Angular Clocks</h1>
+      </a>
+    </ng-template>
+  </div>
+  <ul class="nav-links">
+    <li *ngFor="let option of options">
+      <a [routerLink]="option.path ? option.path : '#' " class="nav-link" (click)="handleClick(option, $event)">
+        {{option.label}}
+      </a>
+    </li>
+  </ul>
+</nav>

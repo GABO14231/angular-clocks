@@ -1,0 +1,42 @@
+import {Component, Input, HostListener, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Router, RouterModule} from '@angular/router';
+export interface NavbarOption {label: string; path?: string; method?: () => void;}
+
+@Component({selector: 'app-navbar', standalone: true, imports: [CommonModule, RouterModule],
+    templateUrl: './Navbar.html', styleUrls: ['./Navbar.css']})
+
+export class NavbarComponent implements OnInit
+{
+    @Input() options: NavbarOption[] = [];
+    isVisible = true;
+    isHome = false;
+    private lastScrollY = 0;
+
+    constructor(private router: Router) {}
+
+    ngOnInit(): void
+    {
+        this.lastScrollY = window.scrollY;
+        this.checkRoute();
+        this.router.events.subscribe(() => this.checkRoute());
+    }
+    checkRoute(): void {this.isHome = this.router.url === '/';}
+
+    @HostListener('window:scroll', [])
+    onWindowScroll(): void
+    {
+        if (window.scrollY > this.lastScrollY) this.isVisible = false;
+        else this.isVisible = true;
+        this.lastScrollY = window.scrollY;
+    }
+
+    handleClick(option: NavbarOption, event: Event): void
+    {
+        if (option.method)
+        {
+            option.method();
+            event.preventDefault();
+        }
+    }
+}
