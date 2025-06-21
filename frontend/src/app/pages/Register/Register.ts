@@ -11,7 +11,7 @@ import {lastValueFrom} from 'rxjs';
     imports: [ModalComponent, FontAwesomeModule, FormsModule, RouterModule], templateUrl: './Register.html',
     styleUrls: ['./Register.css']})
 
-export class RegisterComponent
+export class RegisterPage
 {
     input = {username: '', email: '', password: '', first_name: '', last_name: ''};
     showPassword = false;

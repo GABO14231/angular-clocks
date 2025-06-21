@@ -11,7 +11,7 @@ import {lastValueFrom} from 'rxjs';
     imports: [ModalComponent, FontAwesomeModule, FormsModule], templateUrl: './RecoverPassword.html',
     styleUrls: ['./RecoverPassword.css']})
 
-export class RecoverPasswordComponent
+export class RecoverPasswordPage
 {
     code: string = "";
     newPassword: string = "";

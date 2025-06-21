@@ -17,7 +17,7 @@ export interface ConfirmModalConfig {message: string; buttons: ConfirmButton[];}
     imports: [FormsModule, FontAwesomeModule, ModalComponent, NavbarComponent, CommonModule, RouterModule],
     templateUrl: './Profile.html', styleUrls: ['./Profile.css']})
 
-export class ProfileComponent implements OnInit, OnDestroy
+export class ProfilePage implements OnInit, OnDestroy
 {
     user: User | null = null;
     form = {username: "", email: "", first_name: "", last_name: "", code: "", currentPassword: "", newPassword: "",

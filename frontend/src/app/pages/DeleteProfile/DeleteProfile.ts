@@ -13,7 +13,7 @@ export interface ConfirmModalConfig {message: string; buttons: {label: string; a
 @Component({selector: 'app-delete-profile-page', standalone: true,
     imports: [ModalComponent, FontAwesomeModule, FormsModule, CommonModule, RouterModule],
     templateUrl: './DeleteProfile.html', styleUrls: ['./DeleteProfile.css']})
-export class DeleteProfilePageComponent implements OnInit, OnDestroy
+export class DeleteProfilePage implements OnInit, OnDestroy
 {
     user: User | null = null;
     userSub!: Subscription;

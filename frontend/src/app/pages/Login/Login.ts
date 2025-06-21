@@ -10,7 +10,7 @@ import {AuthService} from '../../services/AuthService';
     imports: [ModalComponent, FontAwesomeModule, FormsModule, RouterModule], templateUrl: './Login.html',
     styleUrls: ['./Login.css']})
 
-export class LoginComponent
+export class LoginPage
 {
     input = {identifier: '', password: ''};
     message = '';
