@@ -1,0 +1,12 @@
+<div class="overlay" (click)="$event.stopPropagation()" *ngIf="message">
+  <div class="modal">
+    <div class="content">
+      <p>{{ message }}</p>
+      <div class="button-group">
+        <button *ngFor="let button of buttons" (click)="button.action()">
+          {{button.label}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
