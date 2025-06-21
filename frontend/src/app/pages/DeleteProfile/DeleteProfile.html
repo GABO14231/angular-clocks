@@ -1,0 +1,21 @@
+<div class="delete-profile-page">
+    <h2>Delete Profile</h2>
+    <p>This action cannot be undone.</p>
+    <form>
+        <div class="password-wrapper">
+            <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter your password to confirm"
+                [(ngModel)]="password" name="password" />
+            <button type="button" (click)="togglePasswordVisibility()" class="toggle-password">
+                <fa-icon [icon]="showPassword ? 'eye-slash' : 'eye'"></fa-icon>
+            </button>
+        </div>
+        <button class="deleteButton" type="button" (click)="confirmDeleteProfile()">Confirm Delete</button>
+        <ng-container *ngIf="showConfirmModal">
+            <app-modal [message]="confirmModalConfig.message" [buttons]="confirmModalConfig.buttons"></app-modal>
+        </ng-container>
+        <ng-container *ngIf="message">
+            <app-modal [message]="message" [buttons]="[{label: 'Close', action: clearMessage}]"></app-modal>
+        </ng-container>
+    </form>
+    <button class="cancelButton" (click)="cancel()">Cancel</button>
+</div>
