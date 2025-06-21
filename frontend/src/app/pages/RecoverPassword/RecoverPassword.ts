@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import {ModalComponent} from '../../components/Modal/Modal';
-import {ProfileManagementService} from '../../services/ProfileManagement';
+import {ProfileService} from '../../services/ProfileService';
 import {lastValueFrom} from 'rxjs';
 
 @Component({selector: 'app-recover-password', standalone: true,
@@ -21,7 +21,7 @@ export class RecoverPasswordComponent
     message: string = "";
     navigateAfterClose: boolean = false;
 
-    constructor(private profileService: ProfileManagementService, private router: Router, library: FaIconLibrary) {
+    constructor(private profileService: ProfileService, private router: Router, library: FaIconLibrary) {
         library.addIcons(faEye, faEyeSlash);}
 
     toggleNewPasswordVisibility(): void {this.showNewPassword = !this.showNewPassword;}

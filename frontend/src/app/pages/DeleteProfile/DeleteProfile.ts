@@ -5,11 +5,11 @@ import {FormsModule} from '@angular/forms';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import {ModalComponent} from '../../components/Modal/Modal';
-import {ProfileManagementService} from '../../services/ProfileManagement';
+import {ProfileService} from '../../services/ProfileService';
 import {AuthService, User} from '../../services/AuthService';
 import {Subscription, lastValueFrom} from 'rxjs';
 
-export interface ConfirmModalConfig {message: string; buttons: { label: string; action: () => void }[];}
+export interface ConfirmModalConfig {message: string; buttons: {label: string; action: () => void }[];}
 @Component({selector: 'app-delete-profile-page', standalone: true,
     imports: [ModalComponent, FontAwesomeModule, FormsModule, CommonModule, RouterModule],
     templateUrl: './DeleteProfile.html', styleUrls: ['./DeleteProfile.css']})
@@ -23,7 +23,7 @@ export class DeleteProfilePageComponent implements OnInit, OnDestroy
     showConfirmModal: boolean = false;
     confirmModalConfig: ConfirmModalConfig = {message: "", buttons: []};
 
-    constructor(private profileService: ProfileManagementService, private authService: AuthService,
+    constructor(private profileService: ProfileService, private authService: AuthService,
         private router: Router, library: FaIconLibrary) {library.addIcons(faEye, faEyeSlash);}
 
     ngOnInit(): void {this.userSub = this.authService.user$.subscribe(u => {this.user = u;});}

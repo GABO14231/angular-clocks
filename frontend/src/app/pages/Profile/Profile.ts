@@ -6,7 +6,7 @@ import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import {NavbarComponent} from '../../components/Navbar/Navbar';
 import {ModalComponent} from '../../components/Modal/Modal';
-import {ProfileManagementService} from '../../services/ProfileManagement';
+import {ProfileService} from '../../services/ProfileService';
 import {AuthService, User} from '../../services/AuthService';
 import {Subscription, lastValueFrom} from 'rxjs';
 
@@ -15,7 +15,7 @@ export interface ConfirmModalConfig {message: string; buttons: ConfirmButton[];}
 
 @Component({selector: 'app-profile', standalone: true,
     imports: [FormsModule, FontAwesomeModule, ModalComponent, NavbarComponent, CommonModule, RouterModule],
-    templateUrl: './Profile.html',styleUrls: ['./Profile.css']})
+    templateUrl: './Profile.html', styleUrls: ['./Profile.css']})
 
 export class ProfileComponent implements OnInit, OnDestroy
 {
@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit, OnDestroy
     navbarOptions = [{label: "Go Back", path: "/"}, {label: "Logout", path: "/", method: () => this.handleLogout()}];
     userSub!: Subscription;
 
-    constructor(private profileService: ProfileManagementService, private authService: AuthService,
+    constructor(private profileService: ProfileService, private authService: AuthService,
         private router: Router, library: FaIconLibrary) {library.addIcons(faEye, faEyeSlash);}
 
     ngOnInit(): void
@@ -137,9 +137,9 @@ export class ProfileComponent implements OnInit, OnDestroy
     {
         this.confirmModalConfig =
         {
-          message: "Are you sure you want to update your profile?",
-          buttons: [{label: "Yes, change it", action: this.doUpdateProfile.bind(this)},
-              {label: "Cancel", action: this.doCancelModal.bind(this)}]
+            message: "Are you sure you want to update your profile?",
+            buttons: [{label: "Yes, change it", action: this.doUpdateProfile.bind(this)},
+                {label: "Cancel", action: this.doCancelModal.bind(this)}]
         };
         this.showConfirmModal = true;
     }
@@ -185,7 +185,6 @@ export class ProfileComponent implements OnInit, OnDestroy
     }
 
     doCancelModal(): void {this.showConfirmModal = false;}
-
     togglePasswordVisibility(field: string): void {this.passwordVisibility[field] = !this.passwordVisibility[field];}
 
     handleLogout(): void
