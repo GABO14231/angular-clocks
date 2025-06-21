@@ -230,8 +230,8 @@ app.delete('/:id', async (req, res) =>
             await runQuery(config.queries.resetUserId3);
         }
         console.log(`User deleted and IDs corrected.`);
-        res.clearCookie('connect.sid');
         req.session.destroy();
+        res.clearCookie('connect.sid');
         res.status(200).json({status: 'success', message: 'User deleted and IDs renumbered.'});
     }
     catch (error)
@@ -242,5 +242,4 @@ app.delete('/:id', async (req, res) =>
 });
 
 const httpsServer = https.createServer(credentials, app);
-
 httpsServer.listen(port, () => console.log(`Server running on port ${port}`));
