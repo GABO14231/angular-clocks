@@ -1,0 +1,20 @@
+<div class="login-container">
+    <h2>Login</h2>
+    <form (ngSubmit)="handleSubmit()">
+        <input type="text" name="identifier" placeholder="Username or Email" [(ngModel)]="input.identifier" required
+            ngModel />
+        <div class="password-wrapper">
+            <input [type]="showPassword ? 'text' : 'password'" name="password" placeholder="Password"
+                [(ngModel)]="input.password" required ngModel />
+            <button type="button" (click)="togglePasswordVisibility()" class="toggle-password">
+                <fa-icon [icon]="showPassword ? 'eye-slash' : 'eye'"></fa-icon>
+            </button>
+        </div>
+        <button type="submit" class="login-button">Log In</button>
+    </form>
+    <app-modal [message]="message" [buttons]="[{label: 'Close', action: clearMessage.bind(this)}]"></app-modal>
+    <div class="login-links">
+        <a routerLink="/">Back to Home</a> | <a routerLink="/register">Register</a> |
+        <a routerLink="/recoverpass">Forgot Password?</a>
+    </div>
+</div>

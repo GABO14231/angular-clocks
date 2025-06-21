@@ -1,0 +1,88 @@
+.login-container
+{
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 20px;
+    background-color: #2a2c30;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container h2
+{
+    color: #4A90E2;
+    margin-bottom: 15px;
+}
+
+.login-container form
+{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.login-container input
+{
+    width: 96%;
+    padding: 12px;
+    border: 2px solid;
+    border-color: transparent;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #1f2023;
+    color: #dadada;
+    transition: border 0.3s ease-in-out;
+}
+
+.login-container input:focus
+{
+    border-color: #4A90E2;
+    outline: none;
+}
+
+.login-button
+{
+    background-color: #4A90E2;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s ease;
+}
+
+.login-button:hover {background-color: #357ABD;}
+.login-links {margin-top: 15px;}
+
+.login-links a
+{
+    color: #4A90E2;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-links a:hover {color: #ddd;}
+.password-wrapper {position: relative;}
+
+.toggle-password
+{
+    position: absolute;
+    right: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    color: #dadada;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.toggle-password:hover {color: #4A90E2;}
