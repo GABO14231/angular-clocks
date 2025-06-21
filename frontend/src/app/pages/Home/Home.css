@@ -1,0 +1,14 @@
+.home
+{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 70px;
+}
+
+header h1 {color: #4A90E2;}
+
+.logo
+{
+    width: 350px;
+    height: auto;
+}
