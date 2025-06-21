@@ -1,0 +1,21 @@
+<div class="register-container">
+    <h2>Register</h2>
+    <form (submit)="handleSubmit()">
+        <input name="username" placeholder="Username" [(ngModel)]="input.username" />
+        <input name="email" placeholder="Email" [(ngModel)]="input.email" />
+        <input name="first_name" placeholder="First Name" [(ngModel)]="input.first_name" />
+        <input name="last_name" placeholder="Last Name" [(ngModel)]="input.last_name" />
+        <div class="password-wrapper">
+            <input [type]="showPassword ? 'text' : 'password'" name="password" placeholder="Password"
+                [(ngModel)]="input.password" />
+            <button type="button" (click)="togglePasswordVisibility()" class="toggle-password">
+                <fa-icon [icon]="showPassword ? 'eye-slash' : 'eye'"></fa-icon>
+            </button>
+        </div>
+        <button type="submit" class="submitButton">Register</button>
+    </form>
+    <app-modal [message]="message" [buttons]="[{label: 'Close', action: handleModalClose.bind(this)}]"></app-modal>
+    <div class="login-links">
+        <a routerLink="/">Back to Home</a>
+    </div>
+</div>
