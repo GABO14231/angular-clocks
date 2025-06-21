@@ -14,7 +14,7 @@
             <app-modal [message]="confirmModalConfig.message" [buttons]="confirmModalConfig.buttons"></app-modal>
         </ng-container>
         <ng-container *ngIf="message">
-            <app-modal [message]="message" [buttons]="[{label: 'Close', action: clearMessage}]"></app-modal>
+            <app-modal [message]="message" [buttons]="[{label: 'Close', action: clearMessage.bind(this)}]"></app-modal>
         </ng-container>
     </form>
     <button class="cancelButton" (click)="cancel()">Cancel</button>
