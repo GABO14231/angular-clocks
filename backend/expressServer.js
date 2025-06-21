@@ -93,7 +93,7 @@ app.post('/logout', (req, res) =>
 {
     try
     {
-        req.session.destroy()
+        req.session.destroy();
         res.clearCookie('connect.sid');
         console.log('User logged out');
         res.status(200).json({status: "success", message: "Logged out"});
@@ -231,7 +231,7 @@ app.delete('/:id', async (req, res) =>
         }
         console.log(`User deleted and IDs corrected.`);
         res.clearCookie('connect.sid');
-        res.session.destroy();
+        req.session.destroy();
         res.status(200).json({status: 'success', message: 'User deleted and IDs renumbered.'});
     }
     catch (error)
