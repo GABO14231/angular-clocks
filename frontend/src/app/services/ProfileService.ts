@@ -10,21 +10,21 @@ export class ProfileService
 
     registerUser(input: any): Observable<any>
     {
-        const url = `${this.baseUrl}/users/register`;
+        const url = `${this.baseUrl}/register`;
         return this.http.post(url, input, {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
             observe: 'response'});
     }
 
     loadProfile(form: any, profileData: any): Observable<any>
     {
-        const url = `${this.baseUrl}/users/${profileData.id}`;
+        const url = `${this.baseUrl}/${profileData.id}`;
         return this.http.put(url, form, {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
             withCredentials: true,observe: 'response'});
     }
 
     updateCode(id: any): Observable<any>
     {
-        const url = `${this.baseUrl}/users/${id}/updatecode`;
+        const url = `${this.baseUrl}/${id}/updatecode`;
         return this.http.put(url, {id}, {headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
             withCredentials: true, observe: 'response'});
     }
@@ -38,7 +38,7 @@ export class ProfileService
 
     deleteProfile(password: string, id: any): Observable<any>
     {
-        const url = `${this.baseUrl}/users/${id}`;
+        const url = `${this.baseUrl}/${id}`;
         return this.http.request('delete', url,
         {
             body: {password}, headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

@@ -17,7 +17,7 @@ export class AuthService
 
     private checkSession(): void
     {
-        this.http.get<{ status: string; user?: User }>(`${this.baseUrl}/users/session`, {withCredentials: true})
+        this.http.get<{ status: string; user?: User }>(`${this.baseUrl}/session`, {withCredentials: true})
           .pipe(tap(response =>
           {
               if (response.status === "success" && response.user)this._userSubject.next(response.user);
@@ -32,14 +32,14 @@ export class AuthService
 
     login(identifier: string, password: string): Observable<{status: string; message: string}>
     {
-        return this.http.post<{status: string; message: string}>(`${this.baseUrl}/users/login`, {identifier, password},
+        return this.http.post<{status: string; message: string}>(`${this.baseUrl}/login`, {identifier, password},
             {withCredentials: true}).pipe(tap(response => {if (response.status === "success")this.checkSession();}));
     }  
 
     logout(): Observable<{status: string; message: string }>
     {
-        return this.http.post<{status: string; message: string }>(`${this.baseUrl}/users/logout`,
-            {withCredentials: true}).pipe(tap(() => {this._userSubject.next(null);}));
+        return this.http.post<{status: string; message: string }>(`${this.baseUrl}/logout`,
+            {}, {withCredentials: true}).pipe(tap(() => {this._userSubject.next(null);}));
     }
 
     get user(): User | null {return this._userSubject.value;}
