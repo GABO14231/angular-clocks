@@ -46,7 +46,7 @@ export class RegisterPage
         try
         {
             const response = await lastValueFrom(this.profileService.registerUser(this.input));
-            if (response.ok)
+            if (response.body.status === "success")
             {
                 console.log(`Server response: ${response.body.message}`);
                 this.message = "User registered successfully!";

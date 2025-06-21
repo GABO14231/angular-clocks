@@ -52,8 +52,16 @@ export class LoginPage
         {
             next: response =>
             {
-                if (response.status === "success")this.router.navigate(['/']);
-                else this.message = response.message || 'Invalid login credentials.';
+                if (response.status === "success")
+                {
+                    console.log(`Server response: ${response.message}`);
+                    this.router.navigate(['/']);
+                }
+                else
+                {
+                    console.log(`Server response: ${response.message}`);
+                    this.message = response.message;
+                }
             },
             error: err =>
             {

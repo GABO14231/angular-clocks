@@ -51,7 +51,7 @@ export class DeleteProfilePage implements OnInit, OnDestroy
         try
         {
             const response = await lastValueFrom(this.profileService.deleteProfile(this.password, this.user.id));
-            if (response.ok)
+            if (response.body.status === "success")
             {
                 console.log(`Server response: ${response.body.message}`);
                 this.authService.logout().subscribe({next: () => this.router.navigate(['/login']),

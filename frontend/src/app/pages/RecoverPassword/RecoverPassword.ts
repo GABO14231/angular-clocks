@@ -51,7 +51,7 @@ export class RecoverPasswordPage
         try
         {
             const response = await lastValueFrom(this.profileService.recoverPassword(this.code, this.newPassword));
-            if (response.ok)
+            if (response.body.status === "success")
             {
                 console.log(`Server response: ${response.body.message}`);
                 this.message = "Password recovered successfully!";
