@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(session({secret: 'your-secret-key', resave: false, saveUninitialized: false,
     cookie: {httpOnly: true, secure: true, maxAge: 1000 * 60 * 60, sameSite: false}}));
 
-app.post('/users/register', async (req, res) =>
+app.post('/register', async (req, res) =>
 {
     const {username, email, password, first_name, last_name} = req.body;
     const code = generateRecoveryCode();
@@ -40,7 +40,7 @@ app.post('/users/register', async (req, res) =>
         if (existingUserResult.rowCount > 0)
         {
             console.log(`ERROR: User already exists.`);
-            return res.status(400).json({status: "error", message: "A user with this email or username already exists."});
+            return res.status(200).json({status: "error", message: "A user with this email or username already exists."});
         }
         await runQuery(config.queries.addUser, [email, username, password, first_name, last_name, code]);
         console.log(`Registered new user: ${username}`);
@@ -49,11 +49,11 @@ app.post('/users/register', async (req, res) =>
     catch (error)
     {
         console.error(error);
-        res.status(500).json({status: "error", message: "Registration failed"});
+        res.status(400).json({status: "error", message: "Registration failed"});
     }
 });
 
-app.post('/users/login', async (req, res) =>
+app.post('/login', async (req, res) =>
 {
     const {identifier, password} = req.body;
     try
@@ -63,13 +63,13 @@ app.post('/users/login', async (req, res) =>
         if (result.rowCount === 0)
         {
             console.log(`ERROR: User could not be found.`);
-            return res.status(400).json({status: "error", message: "User not found."});
+            return res.status(200).json({status: "error", message: "User not found."});
         }
         const user = result.rows[0];
         if (password !== user.user_password)
         {
             console.log(`ERROR: Incorrect credentials.`);
-            return res.status(400).json({status: "error", message: "Invalid credentials."});
+            return res.status(200).json({status: "error", message: "Invalid credentials."});
         }
         req.session.user = {id: user.id_user, username: user.username, email: user.email,
             first_name: user.first_name, last_name: user.last_name, code: user.code};
@@ -79,41 +79,33 @@ app.post('/users/login', async (req, res) =>
     catch (error)
     {
         console.error(error);
-        res.status(500).json({status: "error", message: "An error occurred during login."});
+        res.status(400).json({status: "error", message: "An error occurred during login."});
     }
 });
 
-app.get('/users/session', (req, res) =>
+app.get('/session', (req, res) =>
 {
-    console.log(req.session)
-    if (req.session && req.session.user)
-    {
-        console.log("Session Ok!");
-        res.status(200).json({status: "success", user: req.session.user});
-    }
-    else
-    {
-        console.log("Session Bad!");
-        res.status(200).json({status: "error"});
-    }
+    if (req.session && req.session.user) res.status(200).json({status: "success", user: req.session.user});
+    else res.status(200).json({status: "error"});
 });
 
-app.post('/users/logout', (req, res) =>
+app.post('/logout', (req, res) =>
 {
-    req.session.destroy(err =>
+    try
     {
-        if (err)
-        {
-            console.error(err);
-            return res.status(500).json({status: "error", message: "Logout failed"});
-        }
+        req.session.destroy()
         res.clearCookie('connect.sid');
         console.log('User logged out');
         res.status(200).json({status: "success", message: "Logged out"});
-    });
+    }
+    catch (error)
+    {
+        console.error(error);
+        res.status(400).json({status: "error", message: "Logout failed"});
+    }
 });
 
-app.put('/users/:id', async (req, res) =>
+app.put('/:id', async (req, res) =>
 {
     const {id} = req.params;
     const {username, email, first_name, last_name, currentPassword, newPassword} = req.body;
@@ -123,7 +115,7 @@ app.put('/users/:id', async (req, res) =>
         if (userResult.rowCount === 0)
         {
             console.log(`ERROR: User was not found.`);
-            return res.status(404).json({status: 'error', message: 'User not found'});
+            return res.status(200).json({status: 'error', message: 'User not found'});
         }
         let updateQuery = "";
         let values = [];
@@ -132,7 +124,7 @@ app.put('/users/:id', async (req, res) =>
             if (currentPassword !== userResult.rows[0].user_password)
             {
                 console.log(`ERROR: Current password is incorrect.`);
-                return res.status(400).json({status: 'error', message: 'Current password is incorrect'});
+                return res.status(200).json({status: 'error', message: 'Current password is incorrect'});
             }
             updateQuery = config.queries.updateUser;
             values = [username, email, first_name, last_name, newPassword, id];
@@ -152,11 +144,11 @@ app.put('/users/:id', async (req, res) =>
     catch (error)
     {
         console.error(error);
-        res.status(500).json({status: 'error', message: 'User update failed'});
+        res.status(400).json({status: 'error', message: 'User update failed'});
     }
 });
 
-app.put('/users/:id/updatecode', async (req, res) =>
+app.put('/:id/updatecode', async (req, res) =>
 {
     const {id} = req.params;
     try
@@ -184,7 +176,7 @@ app.put('/recoverpass', async (req, res) =>
         if (idQuery.rowCount === 0)
         {
             console.log(`ERROR: The recovery code is invalid.`);
-            return res.status(400).json({status: 'error', message: 'Invalid recovery code'});
+            return res.status(200).json({status: 'error', message: 'Invalid recovery code'});
         }
         else
         {
@@ -193,7 +185,7 @@ app.put('/recoverpass', async (req, res) =>
             if (newPassword === passwordQuery.rows[0].user_password)
             {
                 console.log(`ERROR: This is your current password.`);
-                return res.status(400).json({status: 'error', message: 'This is your current password'});
+                return res.status(200).json({status: 'error', message: 'This is your current password'});
             }
             else
             {
@@ -208,11 +200,11 @@ app.put('/recoverpass', async (req, res) =>
     catch (error)
     {
         console.error(error);
-        res.status(500).json({status: 'error', message: 'Password recovery failed'});
+        res.status(400).json({status: 'error', message: 'Password recovery failed'});
     }
 });
 
-app.delete('/users/:id', async (req, res) =>
+app.delete('/:id', async (req, res) =>
 {
     const {id} = req.params;
     const {password} = req.body;
@@ -222,12 +214,12 @@ app.delete('/users/:id', async (req, res) =>
         if (userResult.rowCount === 0)
         {
             console.log(`ERROR: User could not be found.`);
-            return res.status(404).json({status: 'error', message: 'User not found'});
+            return res.status(200).json({status: 'error', message: 'User not found'});
         }
         if (password !== userResult.rows[0].user_password)
         {
             console.log(`ERROR: Password is incorrect.`);
-            return res.status(400).json({status: 'error', message: 'Password is incorrect'});
+            return res.status(200).json({status: 'error', message: 'Password is incorrect'});
         }
         await runQuery(config.queries.deleteUser, [id]);
         const checkUsers = await runQuery(config.queries.getUsers);
@@ -245,7 +237,7 @@ app.delete('/users/:id', async (req, res) =>
     catch (error)
     {
         console.error(error);
-        res.status(500).json({status: 'error', message: 'User deletion failed.'});
+        res.status(400).json({status: 'error', message: 'User deletion failed.'});
     }
 });
 
