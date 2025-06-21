@@ -1,11 +1,13 @@
 {
     "name": "angular-clocks-backend",
+    "type": "module",
     "private": true,
     "version": "1.0.0",
     "scripts": {"dev": "node expressServer.js"},
     "dependencies":
     {
         "express": "^5.1.0",
+        "express-session": "^1.18.1",
         "pg": "^8.16.0"
     }
 }

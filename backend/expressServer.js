@@ -1,8 +1,13 @@
 import express from 'express';
+import https from 'https';
 import cors from 'cors';
 import fs from 'fs';
+import session from 'express-session';
 import {runQuery} from './DBComponent.js';
 const config = JSON.parse(fs.readFileSync('./config.json'));
+const cert = fs.readFileSync('../https_certs/angular_clocks.pem', 'utf-8');
+const key = fs.readFileSync('../https_certs/angular_clocks-key.pem', 'utf-8');
+const credentials = {key: key, cert: cert};
 
 const app = express();
 const port = 3000;
@@ -17,10 +22,13 @@ const generateRecoveryCode = () =>
         code += characters.charAt(randomIndex);
     }
     return code;
-}
+};
 
-app.use(cors());
+app.use(cors({origin: 'https://localhost:4200', credentials: true}));
 app.use(express.json());
+
+app.use(session({secret: 'your-secret-key', resave: false, saveUninitialized: false,
+    cookie: {httpOnly: true, secure: true, maxAge: 1000 * 60 * 60, sameSite: false}}));
 
 app.post('/users/register', async (req, res) =>
 {
@@ -32,11 +40,11 @@ app.post('/users/register', async (req, res) =>
         if (existingUserResult.rowCount > 0)
         {
             console.log(`ERROR: User already exists.`);
-            return res.status(400).json({status: "error", message: "An user with this email or username already exists."});
+            return res.status(400).json({status: "error", message: "A user with this email or username already exists."});
         }
-        const result = await runQuery(config.queries.addUser, [email, username, password, first_name, last_name, code]);
+        await runQuery(config.queries.addUser, [email, username, password, first_name, last_name, code]);
         console.log(`Registered new user: ${username}`);
-        res.status(200).json({status: "success", message: "User registered!", user: result.rows[0]});
+        res.status(200).json({status: "success", message: "User registered!"});
     }
     catch (error)
     {
@@ -63,14 +71,46 @@ app.post('/users/login', async (req, res) =>
             console.log(`ERROR: Incorrect credentials.`);
             return res.status(400).json({status: "error", message: "Invalid credentials."});
         }
+        req.session.user = {id: user.id_user, username: user.username, email: user.email,
+            first_name: user.first_name, last_name: user.last_name, code: user.code};
         console.log(`User logged in: ${identifier}`);
-        res.status(200).json({status: "success", message: "Successful login!", user});
+        res.status(200).json({status: "success", message: "Successful login!"});
     }
     catch (error)
     {
         console.error(error);
         res.status(500).json({status: "error", message: "An error occurred during login."});
     }
+});
+
+app.get('/users/session', (req, res) =>
+{
+    console.log(req.session)
+    if (req.session && req.session.user)
+    {
+        console.log("Session Ok!");
+        res.status(200).json({status: "success", user: req.session.user});
+    }
+    else
+    {
+        console.log("Session Bad!");
+        res.status(200).json({status: "error"});
+    }
+});
+
+app.post('/users/logout', (req, res) =>
+{
+    req.session.destroy(err =>
+    {
+        if (err)
+        {
+            console.error(err);
+            return res.status(500).json({status: "error", message: "Logout failed"});
+        }
+        res.clearCookie('connect.sid');
+        console.log('User logged out');
+        res.status(200).json({status: "success", message: "Logged out"});
+    });
 });
 
 app.put('/users/:id', async (req, res) =>
@@ -103,8 +143,11 @@ app.put('/users/:id', async (req, res) =>
             values = [username, email, first_name, last_name, id];
         }
         const result = await runQuery(updateQuery, values);
+        const user = result.rows[0];
+        req.session.user = {id: user.id_user, username: user.username, email: user.email,
+            first_name: user.first_name, last_name: user.last_name, code: user.code};
         console.log(`User updated: ${username}`);
-        res.status(200).json({status: 'success', message: 'User updated successfully', user: result.rows[0]});
+        res.status(200).json({status: 'success', message: 'User updated successfully', user: req.session.user});
     }
     catch (error)
     {
@@ -120,8 +163,10 @@ app.put('/users/:id/updatecode', async (req, res) =>
     {
         const newCode = generateRecoveryCode();
         const result = await runQuery(config.queries.updateCode, [newCode, id]);
+        const user = result.rows[0];
+        req.session.user.code = user.code;
         console.log(`Code updated: ${newCode}`);
-        res.status(200).json({status: 'success', message: 'Code updated successfully', user: result.rows[0]});
+        res.status(200).json({status: 'success', message: 'Code updated successfully', user: req.session.user});
     }
     catch (error)
     {
@@ -148,7 +193,7 @@ app.put('/recoverpass', async (req, res) =>
             if (newPassword === passwordQuery.rows[0].user_password)
             {
                 console.log(`ERROR: This is your current password.`);
-                return res.status(400).json({status: 'error', message: 'This is your current password'});                    
+                return res.status(400).json({status: 'error', message: 'This is your current password'});
             }
             else
             {
@@ -193,6 +238,8 @@ app.delete('/users/:id', async (req, res) =>
             await runQuery(config.queries.resetUserId3);
         }
         console.log(`User deleted and IDs corrected.`);
+        res.clearCookie('connect.sid');
+        res.session.destroy();
         res.status(200).json({status: 'success', message: 'User deleted and IDs renumbered.'});
     }
     catch (error)
@@ -202,4 +249,6 @@ app.delete('/users/:id', async (req, res) =>
     }
 });
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(port, () => console.log(`Server running on port ${port}`));
