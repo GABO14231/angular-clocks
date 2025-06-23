@@ -17,10 +17,10 @@ export class AuthService
 
     private checkSession(): void
     {
-        this.http.get<{ status: string; user?: User }>(`${this.baseUrl}/session`, {withCredentials: true})
+        this.http.get<{status: string; user?: User}>(`${this.baseUrl}/session`, {withCredentials: true})
           .pipe(tap(response =>
           {
-              if (response.status === "success" && response.user)this._userSubject.next(response.user);
+              if (response.status === "success" && response.user) this._userSubject.next(response.user);
               else this._userSubject.next(null);
           }), catchError(err =>
           {
@@ -33,7 +33,7 @@ export class AuthService
     login(identifier: string, password: string): Observable<{status: string; message: string}>
     {
         return this.http.post<{status: string; message: string}>(`${this.baseUrl}/login`, {identifier, password},
-            {withCredentials: true}).pipe(tap(response => {if (response.status === "success")this.checkSession();}));
+            {withCredentials: true}).pipe(tap(response => {if (response.status === "success") this.checkSession();}));
     }  
 
     logout(): Observable<{status: string; message: string }>

@@ -16,7 +16,7 @@ export interface NavbarOption
 export class ClockDashboardPage implements OnInit, OnDestroy
 {
     user: any = null;
-    homeOptions = [{label: "Home", path: "/"}, {label: "Settings", path: "/profile"},
+    dashboardOptions = [{label: "Home", path: "/"}, {label: "Settings", path: "/profile"},
         {label: "Logout", path: "/", method: () => this.handleLogout()}];
     userSub!: Subscription;
 
