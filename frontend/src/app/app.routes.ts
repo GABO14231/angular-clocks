@@ -6,7 +6,7 @@ import {RegisterPage} from './pages/Register/Register';
 import {ProfilePage} from './pages/Profile/Profile';
 import {DeleteProfilePage} from './pages/DeleteProfile/DeleteProfile';
 import {RecoverPasswordPage} from './pages/RecoverPassword/RecoverPassword';
-// import {ClockDashboardPage} from './pages/ClockDashboard/ClockDashboard';
+import {ClockDashboardPage} from './pages/ClockDashboard/ClockDashboard';
 import {AuthGuard} from './guards/AuthGuard';
 import {LoginGuard} from './guards/LoginGuard';
 
@@ -18,7 +18,7 @@ export const routes: Routes =
     {path: 'profile', component: ProfilePage, canActivate: [AuthGuard]},
     {path: 'delprofile', component: DeleteProfilePage, canActivate: [AuthGuard]},
     {path: 'recoverpass', component: RecoverPasswordPage},
-    // {path: 'dashboard', component: ClockDashboardPage, canActivate: [AuthGuard]},
+    {path: 'dashboard', component: ClockDashboardPage, canActivate: [AuthGuard]},
 ];
 
 @NgModule({imports: [RouterModule.forRoot(routes)], exports: [RouterModule]})

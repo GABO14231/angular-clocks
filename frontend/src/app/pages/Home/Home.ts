@@ -34,7 +34,7 @@ export class Home implements OnInit, OnDestroy
     setHomeOptions(): void
     {
         if (this.user)
-            this.homeOptions = [{label: "Clocks", path: "/"},
+            this.homeOptions = [{label: "Clocks", path: "/dashboard"},
                 {label: "Settings", path: "/profile"},
                 {label: "Logout", path: "/", method: this.handleLogout.bind(this)}];
         else this.homeOptions = [{label: "Login", path: "/login"}, {label: "Register", path: "/register"}];

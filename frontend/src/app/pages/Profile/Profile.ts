@@ -28,7 +28,7 @@ export class ProfilePage implements OnInit, OnDestroy
         backupCode: false};
     showConfirmModal: boolean = false;
     confirmModalConfig: ConfirmModalConfig = {message: "", buttons: []};
-    navbarOptions = [{label: "Go Back", path: "/"}, {label: "Logout", path: "/", method: () => this.handleLogout()}];
+    navbarOptions = [{label: "Go Back", path: "/dashboard"}, {label: "Logout", path: "/", method: () => this.handleLogout()}];
     userSub!: Subscription;
 
     constructor(private profileService: ProfileService, private authService: AuthService,
