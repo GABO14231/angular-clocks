@@ -16,6 +16,6 @@
     </form>
     <app-modal [message]="message" [buttons]="[{label: 'Close', action: handleModalClose.bind(this)}]"></app-modal>
     <div class="login-links">
-        <a href="javascript:void(0)" (click)="previousPage()">Go Back</a>
+        <a (click)="previousPage()">Go Back</a>
     </div>
 </div>

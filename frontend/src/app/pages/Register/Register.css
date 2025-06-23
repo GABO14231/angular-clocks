@@ -79,7 +79,7 @@
 }
 
 .toggle-password:hover {color: #4A90E2;}
-.login-links {margin-top: 15px;}
+.login-links {margin-top: 15px; cursor: pointer;}
 
 .login-links a
 {
