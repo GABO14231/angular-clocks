@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Location} from '@angular/common';
 import {Router, RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
@@ -18,8 +19,8 @@ export class RegisterPage
     message = '';
     navigateAfterClose = false;
 
-    constructor(private profileService: ProfileService, private router: Router, library: FaIconLibrary) {
-        library.addIcons(faEye, faEyeSlash);}
+    constructor(private profileService: ProfileService, private router: Router, library: FaIconLibrary,
+        private location: Location) {library.addIcons(faEye, faEyeSlash);}
 
     validateInput(): string
     {
@@ -66,6 +67,7 @@ export class RegisterPage
     }
 
     togglePasswordVisibility(): void {this.showPassword = !this.showPassword;}
+    previousPage(): void {this.location.back();}
     handleModalClose(): void
     {
         this.message = '';
