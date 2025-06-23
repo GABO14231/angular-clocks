@@ -13,6 +13,6 @@ export class LoginGuard implements CanActivate
     {
         return this.auth.authInitialized$.pipe(filter(initialized => initialized === true),
             take(1), switchMap(() => this.auth.user$), take(1),
-            map(user => {return !user ? true : this.router.createUrlTree(['/']);}));
+            map(user => {return !user ? true : this.router.createUrlTree(['/dashboard']);}));
     }
 }

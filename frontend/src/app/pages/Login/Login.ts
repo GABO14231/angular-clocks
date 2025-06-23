@@ -5,6 +5,7 @@ import {ModalComponent} from '../../components/Modal/Modal';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from '../../services/AuthService';
+import {filter, take} from 'rxjs/operators';
 
 @Component({selector: 'app-login', standalone: true,
     imports: [ModalComponent, FontAwesomeModule, FormsModule, RouterModule], templateUrl: './Login.html',
@@ -55,7 +56,8 @@ export class LoginPage
                 if (response.status === "success")
                 {
                     console.log(`Server response: ${response.message}`);
-                    this.router.navigate(['/']);
+                    this.authService.user$.pipe(filter(user => !!user), take(1))
+                        .subscribe(() => {this.router.navigate(['/dashboard']);});
                 }
                 else
                 {
