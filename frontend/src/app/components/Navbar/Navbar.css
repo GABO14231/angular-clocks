@@ -38,6 +38,7 @@
 
 .nav-links
 {
+    cursor: pointer;
     list-style: none;
     display: flex;
     gap: 15px;

@@ -13,7 +13,7 @@
   </div>
   <ul class="nav-links">
     <li *ngFor="let option of options">
-      <a [routerLink]="option.path ? option.path : '#' " class="nav-link" (click)="handleClick(option, $event)">
+      <a [routerLink]="option.path || null" class="nav-link" (click)="handleClick(option, $event)">
         {{option.label}}
       </a>
     </li>

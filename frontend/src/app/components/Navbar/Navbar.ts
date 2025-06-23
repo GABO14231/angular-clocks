@@ -1,7 +1,7 @@
 import {Component, Input, HostListener, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router, RouterModule} from '@angular/router';
-export interface NavbarOption {label: string; path?: string; method?: () => void;}
+export interface NavbarOption {label: string; path?: string; method?: () => boolean | void}
 
 @Component({selector: 'app-navbar', standalone: true, imports: [CommonModule, RouterModule],
     templateUrl: './Navbar.html', styleUrls: ['./Navbar.css']})
@@ -26,8 +26,7 @@ export class NavbarComponent implements OnInit
     @HostListener('window:scroll', [])
     onWindowScroll(): void
     {
-        if (window.scrollY > this.lastScrollY) this.isVisible = false;
-        else this.isVisible = true;
+        this.isVisible = window.scrollY <= this.lastScrollY;
         this.lastScrollY = window.scrollY;
     }
 
@@ -35,8 +34,8 @@ export class NavbarComponent implements OnInit
     {
         if (option.method)
         {
-            option.method();
-            event.preventDefault();
+            const result = option.method();
+            if (!option.path || result === false) event.preventDefault();
         }
     }
 }
