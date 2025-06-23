@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
-import {CommonModule} from '@angular/common';
+import {CommonModule, Location} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
@@ -28,11 +28,13 @@ export class ProfilePage implements OnInit, OnDestroy
         backupCode: false};
     showConfirmModal: boolean = false;
     confirmModalConfig: ConfirmModalConfig = {message: "", buttons: []};
-    navbarOptions = [{label: "Go Back", path: "/dashboard"}, {label: "Logout", path: "/", method: () => this.handleLogout()}];
+    navbarOptions = [{label: "Go Back", method: () => this.previousPage()},
+        {label: "Logout", path: "/", method: () => this.handleLogout()}];
     userSub!: Subscription;
 
     constructor(private profileService: ProfileService, private authService: AuthService,
-        private router: Router, library: FaIconLibrary) {library.addIcons(faEye, faEyeSlash);}
+        private router: Router, library: FaIconLibrary, private location: Location)
+        {library.addIcons(faEye, faEyeSlash);}
 
     ngOnInit(): void
     {
@@ -57,6 +59,7 @@ export class ProfilePage implements OnInit, OnDestroy
     }
 
     ngOnDestroy(): void {if (this.userSub) this.userSub.unsubscribe();}
+    previousPage(): void {this.location.back();}
     validateInput(): string
     {
         const {username, email, currentPassword, newPassword, confirmPassword} = this.form;
