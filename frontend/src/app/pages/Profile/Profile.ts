@@ -8,6 +8,7 @@ import {NavbarComponent} from '../../components/Navbar/Navbar';
 import {ModalComponent} from '../../components/Modal/Modal';
 import {ProfileService} from '../../services/ProfileService';
 import {AuthService, User} from '../../services/AuthService';
+import {UrlService} from '../../services/UrlService';
 import {Subscription, lastValueFrom} from 'rxjs';
 
 export interface ConfirmButton {label: string; action: () => void;}
@@ -22,7 +23,6 @@ export class ProfilePage implements OnInit, OnDestroy
     user: User | null = null;
     form = {username: "", email: "", first_name: "", last_name: "", code: "", currentPassword: "", newPassword: "",
         confirmPassword: ""};
-
     message: string = "";
     passwordVisibility: {[key: string]: boolean} = {currentPassword: false, newPassword: false, confirmPassword: false,
         backupCode: false};
@@ -31,9 +31,10 @@ export class ProfilePage implements OnInit, OnDestroy
     navbarOptions = [{label: "Go Back", method: () => this.previousPage()},
         {label: "Logout", path: "/", method: () => this.handleLogout()}];
     userSub!: Subscription;
+    previousUrl: string | undefined;
 
     constructor(private profileService: ProfileService, private authService: AuthService,
-        private router: Router, library: FaIconLibrary, private location: Location)
+        private router: Router, library: FaIconLibrary, private location: Location, private urlService: UrlService)
         {library.addIcons(faEye, faEyeSlash);}
 
     ngOnInit(): void
@@ -56,10 +57,17 @@ export class ProfilePage implements OnInit, OnDestroy
                 };
             }
         });
+        this.previousUrl = this.urlService.getPreviousUrl();
     }
 
     ngOnDestroy(): void {if (this.userSub) this.userSub.unsubscribe();}
-    previousPage(): void {this.location.back();}
+
+    previousPage(): void
+    {
+        if (this.previousUrl === "/delprofile") this.router.navigate(['/dashboard']);
+        else this.location.back();
+    }
+
     validateInput(): string
     {
         const {username, email, currentPassword, newPassword, confirmPassword} = this.form;
@@ -195,5 +203,6 @@ export class ProfilePage implements OnInit, OnDestroy
         this.authService.logout().subscribe({next: response => console.log("Logged out:", response.message),
             error: err => console.error(err)});
     }
+
     clearMessage(): void {this.message = "";}
 }
