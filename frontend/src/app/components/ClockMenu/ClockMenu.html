@@ -1,0 +1,7 @@
+<div class="menu-container">
+    <ul class="menu-list">
+        <li *ngFor="let option of options" (click)="onOptionSelect(option)">
+            {{option.label}}
+        </li>
+    </ul>
+</div>  

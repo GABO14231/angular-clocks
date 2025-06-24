@@ -3,5 +3,5 @@
     <header class="dashboard">
         <h1>Clock Dashboard</h1>
     </header>
-    <app-clock></app-clock>
+    <app-menu [options]="menuOptions" (optionSelected)="handleMenuSelection($event)"></app-menu>
 </div>
