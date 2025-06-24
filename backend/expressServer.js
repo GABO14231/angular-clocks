@@ -28,7 +28,7 @@ app.use(cors({origin: 'https://localhost:4200', credentials: true}));
 app.use(express.json());
 
 app.use(session({secret: 'your-secret-key', resave: false, saveUninitialized: false,
-    cookie: {httpOnly: true, secure: true, maxAge: 1000 * 60 * 60, sameSite: false}}));
+    cookie: {httpOnly: true, secure: true, maxAge: 24 * 60 * 60 * 1000, sameSite: false}}));
 
 app.post('/register', async (req, res) =>
 {
