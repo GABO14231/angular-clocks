@@ -1,0 +1,91 @@
+.clock-container
+{
+    border-radius: 4%;
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: rgba(88, 86, 86, 0.156);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.clock-container h2
+{
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.time-display
+{
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.format-toggle, .mode-toggle, .manual-inputs, .time-controls, .slider-section {margin-bottom: 2px;}
+.manual-inputs div {margin: 0.5rem 0;}
+
+.time-controls
+{
+    margin: 0.5rem 0;
+    display: flex;
+    flex-direction: row;
+    padding-left: 23px;
+    margin-bottom: 1rem;
+}
+
+.time-unit
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.spinner
+{
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.spinner button
+{
+    font-size: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    background-color: #4A90E2;
+    color: white;
+    cursor: pointer;
+    margin: 0 0.3rem;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.spinner button:hover {background-color: #357ABD;}
+
+.reset-btn, .format-toggle button
+{
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.format-toggle button {margin-bottom: 8px;}
+.reset-btn:hover, .format-toggle button:hover {background-color: #357ABD;}
+.slider-section {margin-bottom: 1rem;}
+.slider-control {margin: 0.5rem 0;}
+
+.slider-control label, .time-controls label
+{
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+}
+.slider-control input[type="range"] {width: 80%;}

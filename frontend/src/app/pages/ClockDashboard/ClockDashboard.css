@@ -1,8 +1,8 @@
 .dashboard
 {
+    margin-top: 90px;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 70px;
 }
 
 header h1 {color: #4A90E2;}

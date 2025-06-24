@@ -1,5 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {NavbarComponent} from '../../components/Navbar/Navbar';
+import {TimeControlsComponent} from '../../components/TimeControls/TimeControls';
 import {AuthService} from '../../services/AuthService';
 import {Subscription} from 'rxjs';
 
@@ -10,8 +11,8 @@ export interface NavbarOption
     method?: () => void;
 }
 
-@Component({selector: 'app-dashboard', standalone: true, imports: [NavbarComponent], templateUrl: './ClockDashboard.html',
-    styleUrls: ['./ClockDashboard.css']})
+@Component({selector: 'app-dashboard', standalone: true, imports: [NavbarComponent, TimeControlsComponent],
+    templateUrl: './ClockDashboard.html', styleUrls: ['./ClockDashboard.css']})
 
 export class ClockDashboardPage implements OnInit, OnDestroy
 {

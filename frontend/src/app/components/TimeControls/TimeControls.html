@@ -1,0 +1,79 @@
+<div class="clock-container">
+    <h2>Internal Clock</h2>
+    <div class="time-display">
+        <span>{{formattedTime}}</span>
+    </div>
+    <div class="format-toggle">
+        <button (click)="toggleFormat()">
+            Switch to {{is24HourFormat ? '12' : '24'}}-Hour Format
+        </button>
+    </div>
+    <div class="mode-toggle">
+        <label>Control Mode: </label>
+        <select [(ngModel)]="controlMode">
+            <option value="sliders">Sliders</option>
+            <option value="buttons">Buttons</option>
+            <option value="inputs">Inputs</option>
+        </select>
+    </div>
+    <div *ngIf="controlMode === 'sliders'" class="slider-section">
+        <div class="slider-control">
+            <label>Hours:</label>
+            <input type="range" min="0" max="23" [(ngModel)]="hours">
+            <span>{{is24HourFormat ? (hours | number:'2.0-0') : spinnerHour}}</span>
+        </div>
+        <div class="slider-control">
+            <label>Minutes:</label>
+            <input type="range" min="0" max="59" [(ngModel)]="minutes">
+            <span>{{minutes | number:'2.0-0'}}</span>
+        </div>
+        <div class="slider-control">
+            <label>Seconds:</label>
+            <input type="range" min="0" max="59" [(ngModel)]="seconds">
+            <span>{{seconds | number:'2.0-0'}}</span>
+        </div>
+    </div>
+    <div *ngIf="controlMode === 'buttons'" class="time-controls">
+        <div class="time-unit">
+            <label>Hours:</label>
+            <div class="spinner">
+                <button (click)="increment('hours')">+</button>
+                <span>{{spinnerHour}}</span>
+                <button (click)="decrement('hours')">-</button>
+            </div>
+        </div>
+        <div class="time-unit">
+            <label>Minutes:</label>
+            <div class="spinner">
+                <button (click)="increment('minutes')">+</button>
+                <span>{{minutes | number:'2.0-0'}}</span>
+                <button (click)="decrement('minutes')">-</button>
+            </div>
+        </div>
+        <div class="time-unit">
+            <label>Seconds:</label>
+            <div class="spinner">
+                <button (click)="increment('seconds')">+</button>
+                <span>{{seconds | number:'2.0-0'}}</span>
+                <button (click)="decrement('seconds')">-</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="controlMode === 'inputs'" class="manual-inputs">
+        <div>
+            <label>Hours: </label>
+            <input type="number" [(ngModel)]="hours" min="0" max="23">
+        </div>
+        <div>
+            <label>Minutes: </label>
+            <input type="number" [(ngModel)]="minutes" min="0" max="59">
+        </div>
+        <div>
+            <label>Seconds: </label>
+            <input type="number" [(ngModel)]="seconds" min="0" max="59">
+        </div>
+    </div>
+    <div>
+        <button class="reset-btn" (click)="resetToSystemTime()">Reset to System Time</button>
+    </div>
+</div>
