@@ -84,4 +84,4 @@
     font-size: 0.9rem;
     margin-bottom: 0.2rem;
 }
-.slider-control input[type="range"] {width: 80%;}
+.slider-control input[type="range"] {width: 80%; accent-color: rgb(59, 59, 255);}
