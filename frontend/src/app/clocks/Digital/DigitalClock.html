@@ -1,8 +1,8 @@
 <div class="digital-clock">
-    <span class="digit hour">{{parsedTime.hour}}</span>
+    <span class="digit hour">{{hour}}</span>
     <span class="separator">:</span>
-    <span class="digit minute">{{parsedTime.minute}}</span>
+    <span class="digit minute">{{minute}}</span>
     <span class="separator">:</span>
-    <span class="digit second">{{parsedTime.second}}</span>
-    <span class="period" *ngIf="parsedTime.period">{{parsedTime.period}}</span>
+    <span class="digit second">{{second}}</span>
+    <span class="period" *ngIf="period">{{period}}</span>
 </div>

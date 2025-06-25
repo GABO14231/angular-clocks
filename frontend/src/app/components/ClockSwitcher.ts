@@ -1,5 +1,6 @@
 import {Component, Input, OnChanges, SimpleChanges, ViewChild, ViewContainerRef} from '@angular/core';
 import {DigitalClockComponent} from '../clocks/Digital/DigitalClock';
+export interface ParsedTime {hour: string; minute: string; second: string; period: string;}
 
 @Component({selector: 'app-clock-switcher', template: "<ng-container #clockContainer></ng-container>", standalone: true})
 
@@ -9,6 +10,7 @@ export class ClockSwitcherComponent implements OnChanges
     @Input() digitalTime: string = '';
     @ViewChild('clockContainer', { read: ViewContainerRef, static: true })
     clockContainer!: ViewContainerRef;
+    private parsedTimeData: ParsedTime = {hour: '', minute: '', second: '', period: ''};
 
     private componentMap: { [key: string]: any } =
     {
@@ -19,15 +21,28 @@ export class ClockSwitcherComponent implements OnChanges
 
     ngOnChanges(changes: SimpleChanges): void
     {
-        if (changes['activeClockType']) this.loadComponent();
-        if (this.currentComponentRef && changes['digitalTime'])
+        if (changes['digitalTime'])
         {
-            if (this.currentComponentRef.instance.hasOwnProperty('time'))
-            {
-                this.currentComponentRef.instance.time = this.digitalTime;
-                this.currentComponentRef.changeDetectorRef.detectChanges();
-            }
+            this.parsedTimeData = this.parseTimeString(this.digitalTime);
+            if (this.currentComponentRef) this.updateComponentTimeInputs();
         }
+        if (changes['activeClockType']) this.loadComponent();
+    }
+
+    private parseTimeString(timeString: string): ParsedTime
+    {
+        let clean = timeString.replace(/\s+/g, ' ').trim();
+        let parts = clean.split(':');
+
+        if (parts.length < 3) return {hour: '', minute: '', second: '', period: ''};
+
+        let hour = parts[0].trim();
+        let minute = parts[1].trim();
+        let secAndPeriod = parts[2].trim().split(' ');
+        let second = secAndPeriod[0];
+        let period = secAndPeriod[1] || '';
+
+        return {hour, minute, second, period};
     }
 
     private loadComponent(): void
@@ -37,11 +52,23 @@ export class ClockSwitcherComponent implements OnChanges
         if (componentType)
         {
             this.currentComponentRef = this.clockContainer.createComponent(componentType);
-            if (this.currentComponentRef.instance.hasOwnProperty('time'))
-            {
-                this.currentComponentRef.instance.time = this.digitalTime;
-                this.currentComponentRef.changeDetectorRef.detectChanges();
-            }
+            this.updateComponentTimeInputs();
+        }
+    }
+
+    private updateComponentTimeInputs(): void
+    {
+        if (this.currentComponentRef && this.currentComponentRef.instance)
+        {
+            if (this.currentComponentRef.instance.hasOwnProperty('hour'))
+                this.currentComponentRef.instance.hour = this.parsedTimeData.hour;
+            if (this.currentComponentRef.instance.hasOwnProperty('minute'))
+                this.currentComponentRef.instance.minute = this.parsedTimeData.minute;
+            if (this.currentComponentRef.instance.hasOwnProperty('second'))
+                this.currentComponentRef.instance.second = this.parsedTimeData.second;
+            if (this.currentComponentRef.instance.hasOwnProperty('period'))
+                this.currentComponentRef.instance.period = this.parsedTimeData.period;
+            this.currentComponentRef.changeDetectorRef.detectChanges();
         }
     }
 }
