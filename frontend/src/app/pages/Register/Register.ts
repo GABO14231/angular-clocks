@@ -10,7 +10,7 @@ import {lastValueFrom} from 'rxjs';
 
 @Component({selector: 'app-register', standalone: true,
     imports: [ModalComponent, FontAwesomeModule, FormsModule, RouterModule], templateUrl: './Register.html',
-    styleUrls: ['./Register.css']})
+    styleUrl: './Register.css'})
 
 export class RegisterPage
 {

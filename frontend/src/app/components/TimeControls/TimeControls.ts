@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 @Component({selector: 'app-clock', standalone: true, imports: [FormsModule, CommonModule],
-    templateUrl: './TimeControls.html', styleUrls: ['./TimeControls.css']})
+    templateUrl: './TimeControls.html', styleUrl: './TimeControls.css'})
 
 export class TimeControlsComponent implements OnInit, OnDestroy
 {

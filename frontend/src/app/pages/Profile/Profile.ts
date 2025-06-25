@@ -16,7 +16,7 @@ export interface ConfirmModalConfig {message: string; buttons: ConfirmButton[];}
 
 @Component({selector: 'app-profile', standalone: true,
     imports: [FormsModule, FontAwesomeModule, ModalComponent, NavbarComponent, CommonModule, RouterModule],
-    templateUrl: './Profile.html', styleUrls: ['./Profile.css']})
+    templateUrl: './Profile.html', styleUrl: './Profile.css'})
 
 export class ProfilePage implements OnInit, OnDestroy
 {

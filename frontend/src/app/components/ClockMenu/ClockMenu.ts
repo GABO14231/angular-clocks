@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 export interface MenuOption {label: string; action: () => void;}
 
 @Component({selector: 'app-menu', standalone: true, imports: [CommonModule, FormsModule],
-    templateUrl: './ClockMenu.html',styleUrls: ['./ClockMenu.css']})
+    templateUrl: './ClockMenu.html', styleUrl: './ClockMenu.css'})
 
 export class ClockMenu
 {

@@ -9,7 +9,7 @@ import {lastValueFrom} from 'rxjs';
 
 @Component({selector: 'app-recover-password', standalone: true,
     imports: [ModalComponent, FontAwesomeModule, FormsModule], templateUrl: './RecoverPassword.html',
-    styleUrls: ['./RecoverPassword.css']})
+    styleUrl: './RecoverPassword.css'})
 
 export class RecoverPasswordPage
 {

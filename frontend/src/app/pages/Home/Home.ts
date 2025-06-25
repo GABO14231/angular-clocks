@@ -11,7 +11,7 @@ export interface NavbarOption
 }
 
 @Component({selector: 'app-home', standalone: true, imports: [NavbarComponent], templateUrl: './Home.html',
-    styleUrls: ['./Home.css']})
+    styleUrl: './Home.css'})
 
 export class Home implements OnInit, OnDestroy
 {

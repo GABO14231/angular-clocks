@@ -4,7 +4,7 @@ import {Router, RouterModule} from '@angular/router';
 export interface NavbarOption {label: string; path?: string; method?: () => boolean | void}
 
 @Component({selector: 'app-navbar', standalone: true, imports: [CommonModule, RouterModule],
-    templateUrl: './Navbar.html', styleUrls: ['./Navbar.css']})
+    templateUrl: './Navbar.html', styleUrl: './Navbar.css'})
 
 export class NavbarComponent implements OnInit
 {

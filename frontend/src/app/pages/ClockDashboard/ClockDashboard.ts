@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs';
 
 @Component({selector: 'app-dashboard', standalone: true,
     imports: [NavbarComponent, TimeControlsComponent, ClockMenu, ClockSwitcherComponent, CommonModule],
-    templateUrl: './ClockDashboard.html',styleUrls: ['./ClockDashboard.css']})
+    templateUrl: './ClockDashboard.html', styleUrl: './ClockDashboard.css'})
 
 export class ClockDashboardPage implements OnInit, AfterViewInit, OnDestroy
 {

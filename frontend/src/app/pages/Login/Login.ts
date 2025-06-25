@@ -9,7 +9,7 @@ import {filter, take} from 'rxjs/operators';
 
 @Component({selector: 'app-login', standalone: true,
     imports: [ModalComponent, FontAwesomeModule, FormsModule, RouterModule], templateUrl: './Login.html',
-    styleUrls: ['./Login.css']})
+    styleUrl: './Login.css'})
 
 export class LoginPage
 {

@@ -12,7 +12,7 @@ import {Subscription, lastValueFrom} from 'rxjs';
 export interface ConfirmModalConfig {message: string; buttons: {label: string; action: () => void }[];}
 @Component({selector: 'app-delete-profile-page', standalone: true,
     imports: [ModalComponent, FontAwesomeModule, FormsModule, CommonModule, RouterModule],
-    templateUrl: './DeleteProfile.html', styleUrls: ['./DeleteProfile.css']})
+    templateUrl: './DeleteProfile.html', styleUrl: './DeleteProfile.css'})
 export class DeleteProfilePage implements OnInit, OnDestroy
 {
     user: User | null = null;

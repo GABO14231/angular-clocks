@@ -8,7 +8,7 @@ export interface ModalButton
 }
 
 @Component({selector: 'app-modal', standalone: true, imports: [CommonModule],
-    templateUrl: './Modal.html', styleUrls: ['./Modal.css']})
+    templateUrl: './Modal.html', styleUrl: './Modal.css'})
 
 export class ModalComponent
 {
