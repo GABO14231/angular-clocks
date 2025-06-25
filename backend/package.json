@@ -3,7 +3,7 @@
     "type": "module",
     "private": true,
     "version": "1.0.0",
-    "scripts": {"dev": "node expressServer.js"},
+    "scripts": {"start": "node expressServer.js"},
     "dependencies":
     {
         "express": "^5.1.0",

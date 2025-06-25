@@ -2,7 +2,7 @@
     "database_params":
     {
         "username": "postgres",
-        "password": "290103GAM",
+        "password": "default-password",
         "database": "angular_clocks",
         "ip": "localhost",
         "port": "5432"
