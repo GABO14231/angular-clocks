@@ -2,7 +2,9 @@ import {Component, Input, ViewChild, ElementRef, AfterViewInit} from '@angular/c
 import {CommonModule} from '@angular/common';
 
 @Component({selector: 'app-analog-clock', standalone: true, imports: [CommonModule],
-    templateUrl: './AnalogClock.html', styleUrls: ['./AnalogClock.css']})
+    template: `<div class="analog-clock-container"><canvas #clockCanvas></canvas></div>`,
+    styleUrl: './AnalogClock.css'})
+
 export class AnalogClockComponent implements AfterViewInit
 {
     @ViewChild('clockCanvas', {static: true}) canvasRef!: ElementRef<HTMLCanvasElement>;
@@ -13,48 +15,13 @@ export class AnalogClockComponent implements AfterViewInit
     private _period: string = '';
 
     @Input()
-    set hour(value: string)
-    {
-        if (this._hour !== value)
-        {
-            this._hour = value;
-            this.drawClock();
-        }
-    }
-    get hour(): string { return this._hour; }
-
+    set hour(value: string) {if (this._hour !== value) {this._hour = value; this.drawClock();}}
     @Input()
-    set minute(value: string)
-    {
-        if (this._minute !== value)
-        {
-            this._minute = value;
-            this.drawClock();
-        }
-    }
-    get minute(): string {return this._minute;}
-
+    set minute(value: string) {if (this._minute !== value) {this._minute = value; this.drawClock();}}
     @Input()
-    set second(value: string)
-    {
-        if (this._second !== value)
-        {
-            this._second = value;
-            this.drawClock();
-        }
-    }
-    get second(): string {return this._second;}
-
+    set second(value: string) {if (this._second !== value) {this._second = value; this.drawClock();}}
     @Input()
-    set period(value: string)
-    {
-        if (this._period !== value)
-        {
-            this._period = value;
-            this.drawClock();
-        }
-    }
-    get period(): string {return this._period;}
+    set period(value: string) {if (this._period !== value) {this._period = value; this.drawClock();}}
 
     constructor() {}
 
