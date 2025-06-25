@@ -3,5 +3,26 @@
     <header class="dashboard">
         <h1>Clock Dashboard</h1>
     </header>
-    <app-menu [options]="menuOptions" (optionSelected)="handleMenuSelection($event)"></app-menu>
+    <div class="dashboardDiv">
+        <div class="sideMenu">
+            <app-menu [options]="menuOptions" (optionSelected)="handleMenuSelection($event)"></app-menu>
+            <div class="controls-toggle-container">
+                <button class="toggle-controls" (click)="toggleTimeControls()">
+                    {{ showTimeControls ? 'Hide Controls' : 'Show Controls' }}
+                </button>
+            </div>
+        </div>
+        <div class="clock-canvas">
+            <app-clock-switcher [activeClockType]="activeClockLabel" [digitalTime]="digitalTime"></app-clock-switcher>
+            <div class="clock-visualizer">
+                <p>{{activeClockLabel}}</p>
+            </div>
+            <div class="time-controls-container" [class.hidden]="!showTimeControls">
+                <app-clock></app-clock>
+            </div>
+            <div style="display: none">
+                <app-clock></app-clock>
+            </div>
+        </div>
+    </div>
 </div>
