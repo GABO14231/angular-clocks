@@ -1,4 +1,4 @@
-# Angular Clock
+# Angular Clocks
 
 ### What is this?
 
