@@ -1,6 +1,12 @@
 import {Component, Input, OnChanges, SimpleChanges, ViewChild, ViewContainerRef} from '@angular/core';
 import {DigitalClockComponent} from '../clocks/Digital/DigitalClock';
 import {AnalogClockComponent} from '../clocks/Analog/AnalogClock';
+import {SandClockComponent} from '../clocks/Sand/SandClock';
+import {BinaryClockComponent} from '../clocks/Binary/BinaryClock';
+import {MorseClockComponent} from '../clocks/Morse/MorseClock';
+import {FibonacciClockComponent} from '../clocks/Fibonacci/FibonacciClock';
+import {ColorPulseClockComponent} from '../clocks/ColorPulse/ColorPulseClock';
+import {SpiralClockComponent} from '../clocks/Spiral/SpiralClock';
 export interface ParsedTime {hour: string; minute: string; second: string; period: string;}
 
 @Component({selector: 'app-clock-switcher', template: "<ng-container #clockContainer></ng-container>", standalone: true})
@@ -13,10 +19,16 @@ export class ClockSwitcherComponent implements OnChanges
     clockContainer!: ViewContainerRef;
     private parsedTimeData: ParsedTime = {hour: '', minute: '', second: '', period: ''};
 
-    private componentMap: { [key: string]: any } =
+    private componentMap: {[key: string]: any} =
     {
         'Digital Clock': DigitalClockComponent,
         'Analog Clock': AnalogClockComponent,
+        'Sand Clock': SandClockComponent,
+        'Binary-LED Clock': BinaryClockComponent,
+        'Morse Clock': MorseClockComponent,
+        'Fibonacci Clock': FibonacciClockComponent,
+        'Color Pulse Clock': ColorPulseClockComponent,
+        'Spiral Clock': SpiralClockComponent,
     };
 
     private currentComponentRef: any;

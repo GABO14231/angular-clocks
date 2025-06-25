@@ -21,9 +21,15 @@ export class ClockDashboardPage implements OnInit, AfterViewInit, OnDestroy
     [
         {label: 'Digital Clock', action: () => this.setActiveClock("Digital Clock")},
         {label: 'Analog Clock', action: () => this.setActiveClock("Analog Clock")},
+        {label: 'Sand Clock', action: () => this.setActiveClock("Sand Clock")},
+        {label: 'Binary-LED Clock', action: () => this.setActiveClock("Binary-LED Clock")},
+        {label: 'Morse Clock', action: () => this.setActiveClock("Morse Clock")},
+        {label: 'Fibonacci Clock', action: () => this.setActiveClock("Fibonacci Clock")},
+        {label: 'Color Pulse Clock', action: () => this.setActiveClock("Color Pulse Clock")},
+        {label: 'Spiral Clock', action: () => this.setActiveClock("Spiral Clock")},
     ];
 
-    activeClockLabel: string = "Select a clock visualization from the menu";
+    activeClockLabel: string = "Select a time visualization from the menu";
     digitalTime: string = "";
     showTimeControls: boolean = false;
     @ViewChild(TimeControlsComponent) timeControls!: TimeControlsComponent;

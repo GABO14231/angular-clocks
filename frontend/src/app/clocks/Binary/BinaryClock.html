@@ -1,0 +1,6 @@
+<div class="binary-clock">
+    <div class="row" *ngFor="let row of bits">
+        <span class="led" *ngFor="let bit of row" [class.on]="bit">
+        </span>
+    </div>
+</div>
