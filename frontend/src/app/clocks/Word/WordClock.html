@@ -1,0 +1,11 @@
+<div class="word-clock-wrapper">
+    <div class="word-clock-container">
+        <span *ngFor="let letter of flattenedGrid; let i = index" [class.active]="activeLetters[i]"
+            class="word-clock-letter">
+            {{letter}}
+        </span>
+    </div>
+    <div class="seconds-display">
+        {{secondsSpelledOut}}
+    </div>
+</div>

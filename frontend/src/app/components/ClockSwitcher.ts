@@ -7,6 +7,8 @@ import {MorseClockComponent} from '../clocks/Morse/MorseClock';
 import {FibonacciClockComponent} from '../clocks/Fibonacci/FibonacciClock';
 import {ColorPulseClockComponent} from '../clocks/ColorPulse/ColorPulseClock';
 import {SpiralClockComponent} from '../clocks/Spiral/SpiralClock';
+import {GearClockComponent} from '../clocks/Gear/GearClock';
+import {WordClockComponent} from '../clocks/Word/WordClock';
 export interface ParsedTime {hour: string; minute: string; second: string; period: string;}
 
 @Component({selector: 'app-clock-switcher', template: "<ng-container #clockContainer></ng-container>", standalone: true})
@@ -29,6 +31,8 @@ export class ClockSwitcherComponent implements OnChanges
         'Fibonacci Clock': FibonacciClockComponent,
         'Color Pulse Clock': ColorPulseClockComponent,
         'Spiral Clock': SpiralClockComponent,
+        'Gear Clock': GearClockComponent,
+        'Word Clock': WordClockComponent,
     };
 
     private currentComponentRef: any;

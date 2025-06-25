@@ -27,6 +27,8 @@ export class ClockDashboardPage implements OnInit, AfterViewInit, OnDestroy
         {label: 'Fibonacci Clock', action: () => this.setActiveClock("Fibonacci Clock")},
         {label: 'Color Pulse Clock', action: () => this.setActiveClock("Color Pulse Clock")},
         {label: 'Spiral Clock', action: () => this.setActiveClock("Spiral Clock")},
+        {label: 'Gear Clock', action: () => this.setActiveClock("Gear Clock")},
+        {label: 'Word Clock', action: () => this.setActiveClock("Word Clock")}
     ];
 
     activeClockLabel: string = "Select a time visualization from the menu";
