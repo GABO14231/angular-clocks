@@ -1,5 +1,6 @@
 import {Component, Input, OnChanges, SimpleChanges, ViewChild, ViewContainerRef} from '@angular/core';
 import {DigitalClockComponent} from '../clocks/Digital/DigitalClock';
+import {AnalogClockComponent} from '../clocks/Analog/AnalogClock';
 export interface ParsedTime {hour: string; minute: string; second: string; period: string;}
 
 @Component({selector: 'app-clock-switcher', template: "<ng-container #clockContainer></ng-container>", standalone: true})
@@ -15,6 +16,7 @@ export class ClockSwitcherComponent implements OnChanges
     private componentMap: { [key: string]: any } =
     {
         'Digital Clock': DigitalClockComponent,
+        'Analog Clock': AnalogClockComponent,
     };
 
     private currentComponentRef: any;
@@ -58,17 +60,12 @@ export class ClockSwitcherComponent implements OnChanges
 
     private updateComponentTimeInputs(): void
     {
-        if (this.currentComponentRef && this.currentComponentRef.instance)
-        {
-            if (this.currentComponentRef.instance.hasOwnProperty('hour'))
-                this.currentComponentRef.instance.hour = this.parsedTimeData.hour;
-            if (this.currentComponentRef.instance.hasOwnProperty('minute'))
-                this.currentComponentRef.instance.minute = this.parsedTimeData.minute;
-            if (this.currentComponentRef.instance.hasOwnProperty('second'))
-                this.currentComponentRef.instance.second = this.parsedTimeData.second;
-            if (this.currentComponentRef.instance.hasOwnProperty('period'))
-                this.currentComponentRef.instance.period = this.parsedTimeData.period;
-            this.currentComponentRef.changeDetectorRef.detectChanges();
-        }
+        const inst = this.currentComponentRef.instance;
+        (inst as any).time = this.digitalTime;
+        (inst as any).hour = this.parsedTimeData.hour;
+        (inst as any).minute = this.parsedTimeData.minute;
+        (inst as any).second = this.parsedTimeData.second;
+        (inst as any).period = this.parsedTimeData.period;
+        this.currentComponentRef.changeDetectorRef.detectChanges();
     }
 }
