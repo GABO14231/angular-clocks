@@ -20,6 +20,7 @@ export class ClockDashboardPage implements OnInit, AfterViewInit, OnDestroy
     menuOptions: MenuOption[] =
     [
         {label: 'Digital Clock', action: () => this.setActiveClock("Digital Clock")},
+        {label: 'Analog Clock', action: () => this.setActiveClock("Analog Clock")},
     ];
 
     activeClockLabel: string = "Select a clock visualization from the menu";
