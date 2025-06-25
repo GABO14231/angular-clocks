@@ -1,9 +1,9 @@
-import {Component, Input, ViewChild, ElementRef,AfterViewInit, OnDestroy} from '@angular/core';
+import {Component, Input, ViewChild, ElementRef, AfterViewInit, OnDestroy} from '@angular/core';
 import {CommonModule} from '@angular/common';
 interface NeckParticle {x: number; y: number; vy: number; r: number;}
 
 @Component({selector: 'app-sand-clock', standalone: true, imports: [CommonModule],
-    template: `<canvas #canvas class="sand-clock"></canvas>`, styleUrls: ['./SandClock.css']})
+    template: `<canvas #canvas class="sand-clock"></canvas>`, styleUrl: './SandClock.css'})
 
 export class SandClockComponent implements AfterViewInit, OnDestroy
 {

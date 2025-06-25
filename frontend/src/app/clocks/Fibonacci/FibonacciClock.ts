@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 @Component({selector: 'app-fibonacci-clock', standalone: true, imports: [CommonModule],
-    templateUrl: './FibonacciClock.html', styleUrls: ['./FibonacciClock.css']})
+    templateUrl: './FibonacciClock.html', styleUrl: './FibonacciClock.css'})
 
 export class FibonacciClockComponent implements OnChanges
 {

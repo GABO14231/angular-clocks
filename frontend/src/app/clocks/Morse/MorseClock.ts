@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 interface MorseTiming {dot: number; dash: number; intra: number; letter: number; loop: number;}
 
 @Component({selector: 'app-morse-clock', standalone: true, imports: [CommonModule],
-    templateUrl: './MorseClock.html', styleUrls: ['./MorseClock.css']})
+    templateUrl: './MorseClock.html', styleUrl: './MorseClock.css'})
 
 export class MorseClockComponent implements OnDestroy
 {

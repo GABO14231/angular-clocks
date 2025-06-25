@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 @Component({selector: 'app-digital-clock', standalone: true, imports: [CommonModule],
-    templateUrl: './DigitalClock.html', styleUrls: ['./DigitalClock.css']})
+    templateUrl: './DigitalClock.html', styleUrl: './DigitalClock.css'})
 
 export class DigitalClockComponent
 {

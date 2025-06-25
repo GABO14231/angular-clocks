@@ -2,8 +2,7 @@ import {Component, Input, ViewChild, ElementRef, AfterViewInit} from '@angular/c
 import {CommonModule} from '@angular/common';
 
 @Component({selector: 'app-analog-clock', standalone: true, imports: [CommonModule],
-    template: `<div class="analog-clock-container"><canvas #clockCanvas></canvas></div>`,
-    styleUrl: './AnalogClock.css'})
+    template: `<canvas #clockCanvas></canvas>`, styleUrl: './AnalogClock.css'})
 
 export class AnalogClockComponent implements AfterViewInit
 {

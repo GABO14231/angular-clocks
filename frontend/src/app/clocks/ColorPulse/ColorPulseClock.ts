@@ -2,7 +2,8 @@ import {Component, Input, HostBinding} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 @Component({selector: 'app-color-pulse-clock', standalone: true,
-    imports: [CommonModule], templateUrl: './ColorPulse.html', styleUrls: ['./ColorPulse.css']})
+    imports: [CommonModule], template: `<div class="color-pulse"><div class="hsl-label">{{bgColor}}</div></div>`,
+    styleUrl: './ColorPulse.css'})
 
 export class ColorPulseClockComponent
 {
