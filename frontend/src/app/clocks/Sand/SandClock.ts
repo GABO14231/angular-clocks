@@ -13,19 +13,16 @@ export class SandClockComponent implements AfterViewInit, OnDestroy
     private lastTs = 0;
     private raf = 0;
     private rotationCount = 0;
-    private _hour = '00'; private _minute = '00';
-    private _second = '00'; private _period = '';
+    private _hour = '00';
+    private _minute = '00';
+    private _second = '00';
+    private _period = '';
 
     @Input() set hour(v: string) {if (v !== this._hour) this._hour = v;}
-    @Input()
-    set minute(v: string)
+    @Input() set minute(v: string)
     {
         const old = this._minute;
-        if (v !== old)
-        {
-            this._minute = v;
-            if (old === '59' && v === '00') this.spin();
-        }
+        if (v !== old) {this._minute = v; if (old === '59' && v === '00') this.spin();}
     }
     @Input() set second(v: string) {if (v !== this._second) {this._second = v;}}
     @Input() set period(v: string) {if (v !== this._period) {this._period = v;}}
@@ -39,10 +36,10 @@ export class SandClockComponent implements AfterViewInit, OnDestroy
 
     ngAfterViewInit()
     {
-        const c = this.canvasRef.nativeElement;
-        this.ctx = c.getContext('2d')!;
-        c.width = c.offsetWidth;
-        c.height = c.offsetHeight;
+        const canvas = this.canvasRef.nativeElement;
+        this.ctx = canvas.getContext('2d')!;
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
         this.lastTs = performance.now();
         this.raf = requestAnimationFrame(t => this.loop(t));
     }
@@ -67,15 +64,16 @@ export class SandClockComponent implements AfterViewInit, OnDestroy
             p.y += p.vy * dt;
             if (p.y >= 1) p.y -= 1;
         }
-        this.draw();
+        this.drawClock();
         this.raf = requestAnimationFrame(t => this.loop(t));
     }
 
-    private draw()
+    private drawClock()
     {
-        const c = this.canvasRef.nativeElement;
+        if (!this.ctx) return;
+        const canvas = this.canvasRef.nativeElement;
         const ctx = this.ctx;
-        const w = c.width, h = c.height;
+        const w = canvas.width, h = canvas.height;
         const cx = w / 2, cy = h / 2;
         ctx.clearRect(0, 0, w, h);
 

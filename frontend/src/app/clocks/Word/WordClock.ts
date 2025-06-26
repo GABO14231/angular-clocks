@@ -59,20 +59,13 @@ export class WordClockComponent
 
     public secondsSpelledOut: string = '';
 
-    constructor()
-    {
-        this.flattenedGrid = this.wordGrid.join('').split('');
-        this.activeLetters = new Array(this.flattenedGrid.length).fill(false);
-    }
+    constructor() {this.flattenedGrid = this.wordGrid.join('').split('');}
 
-    @Input()
-    set hour(value: string) {if (this._hour !== value) {this._hour = value; this.updateWordClock();}}
-    @Input()
-    set minute(value: string) {if (this._minute !== value) {this._minute = value; this.updateWordClock();}}
-    @Input()
-    set second(value: string) {if (this._second !== value) {this._second = value; this.updateWordClock();}}
-    @Input()
-    set period(value: string) {if (this._period !== value) {this._period = value; this.updateWordClock();}}
+    @Input() set hour(value: string) {if (this._hour !== value) {this._hour = value; this.updateClock();}}
+    @Input() set minute(value: string) {if (this._minute !== value) {this._minute = value; this.updateClock();}}
+    @Input() set second(value: string) {if (this._second !== value) {this._second = value; this.updateClock();}}
+    @Input() set period(value: string) {if (this._period !== value) {this._period = value; this.updateClock();}}
+
     private getFlatIndex(r: number, c: number): number {return r * 11 + c;}
     private activateWords(words: string[]): void
     {
@@ -90,7 +83,7 @@ export class WordClockComponent
         });
     }
 
-    private updateWordClock(): void
+    private updateClock(): void
     {
         this.activeLetters = new Array(this.flattenedGrid.length).fill(false);
 

@@ -19,14 +19,10 @@ export class ColorPulseClockComponent
 
     constructor() {this.updateColor();}
 
-    @Input()
-    set hour(v: string) {if (v !== this._hour) {this._hour = v; this.updateColor();}}
-    @Input()
-    set minute(v: string) {if (v !== this._minute) {this._minute = v; this.updateColor();}}
-    @Input()
-    set second(v: string) {if (v !== this._second) {this._second = v;this.updateColor();}}
-    @Input()
-    set period(v: string) {if (v !== this._period) {this._period = v; this.updateColor();}}
+    @Input() set hour(v: string) {if (v !== this._hour) {this._hour = v; this.updateColor();}}
+    @Input() set minute(v: string) {if (v !== this._minute) {this._minute = v; this.updateColor();}}
+    @Input() set second(v: string) {if (v !== this._second) {this._second = v;this.updateColor();}}
+    @Input() set period(v: string) {if (v !== this._period) {this._period = v; this.updateColor();}}
 
     private updateColor()
     {

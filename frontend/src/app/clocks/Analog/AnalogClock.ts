@@ -13,14 +13,10 @@ export class AnalogClockComponent implements AfterViewInit
     private _second: string = '00';
     private _period: string = '';
 
-    @Input()
-    set hour(value: string) {if (this._hour !== value) {this._hour = value; this.drawClock();}}
-    @Input()
-    set minute(value: string) {if (this._minute !== value) {this._minute = value; this.drawClock();}}
-    @Input()
-    set second(value: string) {if (this._second !== value) {this._second = value; this.drawClock();}}
-    @Input()
-    set period(value: string) {if (this._period !== value) {this._period = value; this.drawClock();}}
+    @Input() set hour(v: string) {if (this._hour !== v) {this._hour = v; this.drawClock();}}
+    @Input() set minute(v: string) {if (this._minute !== v) {this._minute = v; this.drawClock();}}
+    @Input() set second(v: string) {if (this._second !== v) {this._second = v; this.drawClock();}}
+    @Input() set period(v: string) {if (this._period !== v) {this._period = v; this.drawClock();}}
 
     constructor() {}
 
@@ -36,7 +32,6 @@ export class AnalogClockComponent implements AfterViewInit
     private drawClock(): void
     {
         if (!this.ctx) return;
-
         const canvas = this.canvasRef.nativeElement;
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
@@ -47,7 +42,7 @@ export class AnalogClockComponent implements AfterViewInit
         this.ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
         this.ctx.fillStyle = '#1f2023';
         this.ctx.fill();
-        this.ctx.strokeStyle = '#333';
+        this.ctx.strokeStyle = '#000dff';
         this.ctx.lineWidth = 8;
         this.ctx.stroke();
         this.ctx.closePath();

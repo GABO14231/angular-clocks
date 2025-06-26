@@ -14,25 +14,26 @@ export class GearClockComponent implements AfterViewInit
     private _second = '00';
     private _period = '';
 
-    @Input() set hour(v: string) {this._hour = v; this.draw();}
-    @Input() set minute(v: string) {this._minute = v; this.draw();}
-    @Input() set second(v: string) {this._second = v; this.draw();}
-    @Input() set period(v: string) {this._period = v; this.draw();}
+    @Input() set hour(v: string) {if (v !== this._hour) {this._hour = v; this.drawClock();}}
+    @Input() set minute(v: string) {if (v !== this._minute) {this._minute = v; this.drawClock();}}
+    @Input() set second(v: string) {if (v !== this._second) {this._second = v; this.drawClock();}}
+    @Input() set period(v: string) {if (v !== this._period) {this._period = v; this.drawClock();}}
 
     ngAfterViewInit()
     {
         const canvas = this.canvasRef.nativeElement;
         this.ctx = canvas.getContext('2d')!;
-        this.draw();
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        this.drawClock();
     }
 
-    private draw()
+    private drawClock()
     {
-        const c = this.canvasRef.nativeElement;
-        c.width = c.offsetWidth;
-        c.height = c.offsetHeight;
+        if (!this.ctx) return;
+        const canvas = this.canvasRef.nativeElement;
         const ctx = this.ctx;
-        const w = c.width, h = c.height;
+        const w = canvas.width, h = canvas.height;
         ctx.clearRect(0, 0, w, h);
 
         let h24 = parseInt(this._hour, 10) || 0;
