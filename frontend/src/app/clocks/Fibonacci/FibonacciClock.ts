@@ -1,10 +1,10 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 @Component({selector: 'app-fibonacci-clock', standalone: true, imports: [CommonModule],
     templateUrl: './FibonacciClock.html', styleUrl: './FibonacciClock.css'})
 
-export class FibonacciClockComponent implements OnChanges
+export class FibonacciClockComponent
 {
     sizesH = [8, 5, 3, 2, 1, 1];
     sizesMS = [34, 21, 13, 8, 5, 3, 2, 1];
@@ -17,14 +17,12 @@ export class FibonacciClockComponent implements OnChanges
     private _second = '00';
     private _period = '';
 
-    @Input() set hour(v: string) {this._hour = v; this.update();}
-    @Input() set minute(v: string) {this._minute = v; this.update();}
-    @Input() set second(v: string) {this._second = v; this.update();}
-    @Input() set period(v: string) {this._period = v; this.update();}
+    @Input() set hour(v: string) {if (v !== this._hour) {this._hour = v; this.updateClock();}}
+    @Input() set minute(v: string) {if (v !== this._minute) {this._minute = v; this.updateClock();}}
+    @Input() set second(v: string) {if (v !== this._second) {this._second = v; this.updateClock();}}
+    @Input() set period(v: string) {if (v !== this._period) {this._period = v; this.updateClock();}}
 
-    ngOnChanges(_: SimpleChanges) {this.update();}
-
-    private update()
+    private updateClock()
     {
         this.updateHours();
         this.updateMinSec();

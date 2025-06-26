@@ -1,11 +1,11 @@
 <div class="fibonacci-clock">
     <div class="row hours">
-        <div *ngFor="let sz of sizesH; let i = index" class="bar" [class.on]="litH[i]" [style.flex]="sz"></div>
+        <div *ngFor="let sz of sizesH; let i = index" class="bar" [class.on]="litH[i]" [style.flex]="sz">{{sz}}</div>
     </div>
     <div class="row minutes">
-        <div *ngFor="let sz of sizesMS; let i = index" class="bar" [class.on]="litM[i]" [style.flex]="sz"></div>
+        <div *ngFor="let sz of sizesMS; let i = index" class="bar" [class.on]="litM[i]" [style.flex]="sz">{{sz}}</div>
     </div>
     <div class="row seconds">
-        <div *ngFor="let sz of sizesMS; let i = index" class="bar" [class.on]="litS[i]" [style.flex]="sz"></div>
+        <div *ngFor="let sz of sizesMS; let i = index" class="bar" [class.on]="litS[i]" [style.flex]="sz">{{sz}}</div>
     </div>
 </div>

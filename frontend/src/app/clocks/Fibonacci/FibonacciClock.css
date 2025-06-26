@@ -24,6 +24,13 @@
     border-radius: 4px 4px 0 0;
     margin-right: 4px;
     transition: background 0.3s, box-shadow 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.6em;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .row .bar:last-child {margin-right: 0;}
