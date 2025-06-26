@@ -1,6 +1,33 @@
 <div class="binary-clock">
-    <div class="row" *ngFor="let row of bits">
-        <span class="led" *ngFor="let bit of row" [class.on]="bit">
+    <div class="labels-row">
+        <span class="label-spacer"></span> <span class="label">H</span>
+        <span class="label-spacer"></span> <span class="label">M</span>
+        <span class="label-spacer"></span> <span class="label">S</span>
+    </div>
+    <div class="row" *ngFor="let row of bits; let r = index">
+        <span class="led-wrapper">
+            <span class="led" [class.on]="row[0]"></span>
+            <span class="bit-value">{{getBitValue(r)}}</span>
+        </span>
+        <span class="led-wrapper">
+            <span class="led" [class.on]="row[1]"></span>
+            <span class="bit-value">{{getBitValue(r)}}</span>
+        </span>
+        <span class="led-wrapper">
+            <span class="led" [class.on]="row[2]"></span>
+            <span class="bit-value">{{getBitValue(r)}}</span>
+        </span>
+        <span class="led-wrapper">
+            <span class="led" [class.on]="row[3]"></span>
+            <span class="bit-value">{{getBitValue(r)}}</span>
+        </span>
+        <span class="led-wrapper">
+            <span class="led" [class.on]="row[4]"></span>
+            <span class="bit-value">{{getBitValue(r)}}</span>
+        </span>
+        <span class="led-wrapper">
+            <span class="led" [class.on]="row[5]"></span>
+            <span class="bit-value">{{getBitValue(r)}}</span>
         </span>
     </div>
 </div>
