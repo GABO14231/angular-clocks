@@ -7,7 +7,7 @@ import {CommonModule} from '@angular/common';
 export class WordClockComponent
 {
     private readonly wordGrid: string[] = ["ITLISASTHEM", "CFIFTEENDCO", "TWENTYFIVEX", "THIRTYFTENS", "MINUTESTHEN",
-        "HALOTHEPAST", "TOUFOURONES", "SEVENTWELVE", "NINEFIVETWO", "EIGHTELEVEN", "SIXTHREEONE", "OCLOCKXAMPM"];
+        "HALOTHEPAST", "TOUFOURONES", "SEVENTWELVE", "NINEFIVETWO", "XZTENLENOVO", "EIGHTELEVEN", "SIXTHREEONE", "OCLOCKXAMPM"];
 
     public flattenedGrid: string[] = [];
     public activeLetters: boolean[] = [];
@@ -17,8 +17,8 @@ export class WordClockComponent
         "IT": [{r: 0, c: 0}, {r: 0, c: 1}],
         "IS": [{r: 0, c: 3}, {r: 0, c: 4}],
         "A": [{r: 0, c: 5}],
-        "AM": [{r: 11, c: 7}, {r: 11, c: 8}],
-        "PM": [{r: 11, c: 9}, {r: 11, c: 10}],
+        "AM": [{r: 12, c: 7}, {r: 12, c: 8}],
+        "PM": [{r: 12, c: 9}, {r: 12, c: 10}],
         "FIFTEEN": [{r: 1, c: 1}, {r: 1, c: 2}, {r: 1, c: 3}, {r: 1, c: 4}, {r: 1, c: 5}, {r: 1, c: 6}, {r: 1, c: 7}],
         "TWENTY": [{r: 2, c: 0}, {r: 2, c: 1}, {r: 2, c: 2}, {r: 2, c: 3}, {r: 2, c: 4}, {r: 2, c: 5}],
         "FIVE_MINUTES": [{r: 2, c: 6}, {r: 2, c: 7}, {r: 2, c: 8}, {r: 2, c: 9}],
@@ -34,11 +34,12 @@ export class WordClockComponent
         "NINE": [{r: 8, c: 0}, {r: 8, c: 1}, {r: 8, c: 2}, {r: 8, c: 3}],
         "FIVE_HOUR": [{r: 8, c: 4}, {r: 8, c: 5}, {r: 8, c: 6}, {r: 8, c: 7}],
         "TWO": [{r: 8, c: 8}, {r: 8, c: 9}, {r: 8, c: 10}],
-        "EIGHT": [{r: 9, c: 0}, {r: 9, c: 1}, {r: 9, c: 2}, {r: 9, c: 3}, {r: 9, c: 4}],
-        "ELEVEN": [{r: 9, c: 5}, {r: 9, c: 6}, {r: 9, c: 7}, {r: 9, c: 8}, {r: 9, c: 9}, {r: 9, c: 10}],
-        "SIX": [{r: 10, c: 0}, {r: 10, c: 1}, {r: 10, c: 2}],
-        "THREE": [{r: 10, c: 3}, {r: 10, c: 4}, {r: 10, c: 5}, {r: 10, c: 6}, {r: 10, c: 7}],
-        "OCLOCK": [{r: 11, c: 0}, {r: 11, c: 1}, {r: 11, c: 2}, {r: 11, c: 3}, {r: 11, c: 4}, {r: 11, c: 5}]
+        "TEN_HOUR": [{r: 9, c: 2}, {r: 9, c: 3}, {r: 9, c: 4}],
+        "EIGHT": [{r: 10, c: 0}, {r: 10, c: 1}, {r: 10, c: 2}, {r: 10, c: 3}, {r: 10, c: 4}],
+        "ELEVEN": [{r: 10, c: 5}, {r: 10, c: 6}, {r: 10, c: 7}, {r: 10, c: 8}, {r: 10, c: 9}, {r: 10, c: 10}],
+        "SIX": [{r: 11, c: 0}, {r: 11, c: 1}, {r: 11, c: 2}],
+        "THREE": [{r: 11, c: 3}, {r: 11, c: 4}, {r: 11, c: 5}, {r: 11, c: 6}, {r: 11, c: 7}],
+        "OCLOCK": [{r: 12, c: 0}, {r: 12, c: 1}, {r: 12, c: 2}, {r: 12, c: 3}, {r: 12, c: 4}, {r: 12, c: 5}]
     };
 
     private readonly numberWords: string[] = ["ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN",
@@ -146,7 +147,7 @@ export class WordClockComponent
             case 7: wordsToActivate.push("SEVEN"); break;
             case 8: wordsToActivate.push("EIGHT"); break;
             case 9: wordsToActivate.push("NINE"); break;
-            case 10: wordsToActivate.push("TEN_MINUTES"); break;
+            case 10: wordsToActivate.push("TEN_HOUR"); break;
             case 11: wordsToActivate.push("ELEVEN"); break;
             case 12: wordsToActivate.push("TWELVE"); break;
         }
