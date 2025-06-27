@@ -3,7 +3,7 @@ To quickly create it, use one of these commands:
 
 ### Create database in one command
 ```
-psql -U username -d angular_clocks -f angular_clocks.sql`
+psql -U username -d angular_clocks -f angular_clocks.sql
 ```
 
 ### Create database and run the SQL file
